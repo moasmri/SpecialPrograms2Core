@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SpecialPrograms2Core.Data;
 
 namespace SpecialPrograms2Core.Models
 {
