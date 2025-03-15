@@ -1,49 +1,110 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SpecialPrograms2Core</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SpecialPrograms2Core.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SpecialPrograms2Core</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+﻿@{
+    ViewBag.Title = "إعدادات الحلقة";
+}
+
+<h2>إعدادات الحلقة</h2>
+
+<h3>برامج الحلقة</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>الاسم</th>
+            <th>الحالة</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var program in ViewBag.Programs)
+        {
+            <tr>
+                <td>@program.ProgramName</td>
+                <td>@(program.IsActive ? "نشط" : "غير نشط")</td>
+                <td>
+                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="type" value="program" />
+                        <input type="hidden" name="id" value="@program.Id" />
+                        <button type="submit" class="btn btn-sm btn-warning">تغيير الحالة</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="AddProgram" method="post">
+    <div class="form-group">
+        <label for="programName">إضافة برنامج جديد:</label>
+        <input type="text" name="programName" class="form-control" id="programName" required />
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - SpecialPrograms2Core - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+    <button type="submit" class="btn btn-primary">إضافة</button>
+</form>
+
+<h3>أنواع الجلسة</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>الاسم</th>
+            <th>الحالة</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var type in ViewBag.SessionTypes)
+        {
+            <tr>
+                <td>@type.TypeName</td>
+                <td>@(type.IsActive ? "نشط" : "غير نشط")</td>
+                <td>
+                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="type" value="sessionType" />
+                        <input type="hidden" name="id" value="@type.Id" />
+                        <button type="submit" class="btn btn-sm btn-warning">تغيير الحالة</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="AddSessionType" method="post">
+    <div class="form-group">
+        <label for="typeName">إضافة نوع جلسة جديد:</label>
+        <input type="text" name="typeName" class="form-control" id="typeName" required />
+    </div>
+    <button type="submit" class="btn btn-primary">إضافة</button>
+</form>
+
+<h3>أوقات الجلسة</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>الوقت</th>
+            <th>الحالة</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var time in ViewBag.SessionTimes)
+        {
+            <tr>
+                <td>@time.TimeName</td>
+                <td>@(time.IsActive ? "نشط" : "غير نشط")</td>
+                <td>
+                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="type" value="sessionTime" />
+                        <input type="hidden" name="id" value="@time.Id" />
+                        <button type="submit" class="btn btn-sm btn-warning">تغيير الحالة</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="AddSessionTime" method="post">
+    <div class="form-group">
+        <label for="timeName">إضافة وقت جلسة جديد:</label>
+        <input type="text" name="timeName" class="form-control" id="timeName" required />
+    </div>
+    <button type="submit" class="btn btn-primary">إضافة</button>
+</form>
