@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "إعدادات الحلقة";
+    Layout = null; // إزالة التخطيط لأننا سنقوم بتحميله جزئيًا.
 }
 
 <h2>إعدادات الحلقة</h2>
@@ -20,7 +20,7 @@
                 <td>@program.ProgramName</td>
                 <td>@(program.IsActive ? "نشط" : "غير نشط")</td>
                 <td>
-                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                    <form asp-action="ToggleStatus" method="post" class="ajax-form" style="display:inline;">
                         <input type="hidden" name="type" value="program" />
                         <input type="hidden" name="id" value="@program.Id" />
                         <button type="submit" class="btn btn-sm btn-warning">تغيير الحالة</button>
@@ -31,7 +31,7 @@
     </tbody>
 </table>
 
-<form asp-action="AddProgram" method="post">
+<form asp-action="AddProgram" method="post" class="ajax-form">
     <div class="form-group">
         <label for="programName">إضافة برنامج جديد:</label>
         <input type="text" name="programName" class="form-control" id="programName" required />
@@ -55,7 +55,7 @@
                 <td>@type.TypeName</td>
                 <td>@(type.IsActive ? "نشط" : "غير نشط")</td>
                 <td>
-                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                    <form asp-action="ToggleStatus" method="post" class="ajax-form" style="display:inline;">
                         <input type="hidden" name="type" value="sessionType" />
                         <input type="hidden" name="id" value="@type.Id" />
                         <button type="submit" class="btn btn-sm btn-warning">تغيير الحالة</button>
@@ -66,7 +66,7 @@
     </tbody>
 </table>
 
-<form asp-action="AddSessionType" method="post">
+<form asp-action="AddSessionType" method="post" class="ajax-form">
     <div class="form-group">
         <label for="typeName">إضافة نوع جلسة جديد:</label>
         <input type="text" name="typeName" class="form-control" id="typeName" required />
@@ -90,7 +90,7 @@
                 <td>@time.TimeName</td>
                 <td>@(time.IsActive ? "نشط" : "غير نشط")</td>
                 <td>
-                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                    <form asp-action="ToggleStatus" method="post" class="ajax-form" style="display:inline;">
                         <input type="hidden" name="type" value="sessionTime" />
                         <input type="hidden" name="id" value="@time.Id" />
                         <button type="submit" class="btn btn-sm btn-warning">تغيير الحالة</button>
@@ -101,10 +101,31 @@
     </tbody>
 </table>
 
-<form asp-action="AddSessionTime" method="post">
+<form asp-action="AddSessionTime" method="post" class="ajax-form">
     <div class="form-group">
         <label for="timeName">إضافة وقت جلسة جديد:</label>
         <input type="text" name="timeName" class="form-control" id="timeName" required />
     </div>
     <button type="submit" class="btn btn-primary">إضافة</button>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('.ajax-form').on('submit', function(e) {
+            e.preventDefault();
+            var $form = $(this);
+            $.ajax({
+                type: $form.attr('method'),
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                success: function(response) {
+                    // إعادة تحميل جزء الصفحة بعد النجاح
+                    $('#adminContent').load('/HalqaSettings/Index');
+                },
+                error: function(response) {
+                    alert('حدث خطأ أثناء إرسال النموذج.');
+                }
+            });
+        });
+    });
+</script>
