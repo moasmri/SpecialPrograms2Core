@@ -1,11 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SpecialPrograms2Core.Data;
 
 namespace SpecialPrograms2Core.Models
 {
-    public class HalqaProgram  // تم تغيير الاسم لتجنب تعارض مع System.Program
+    public class HalqaProgram
     {
         [Key]
         public int Id { get; set; }
@@ -15,5 +12,4 @@ namespace SpecialPrograms2Core.Models
 
         public bool IsActive { get; set; } = true;
     }
-
 }

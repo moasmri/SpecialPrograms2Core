@@ -11,7 +11,5 @@ namespace SpecialPrograms2Core.Models
         public string TypeName { get; set; } // (حضورية / عن بعد)
 
         public bool IsActive { get; set; } = true;
-        public string Name { get; internal set; }
     }
-
 }

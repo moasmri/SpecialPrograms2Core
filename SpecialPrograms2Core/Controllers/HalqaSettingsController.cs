@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SpecialPrograms2Core.Data;
 using SpecialPrograms2Core.Models;
+using SpecialPrograms2Core.Models;
 using System.Threading.Tasks;
 
 namespace SpecialPrograms2Core.Controllers
