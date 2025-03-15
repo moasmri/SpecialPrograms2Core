@@ -1,6 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Admin Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Admin Index</h2>
-<p>Welcome to the Admin area!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Sidebar -->
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading">لوحة التحكم</div>
+                <div class="list-group list-group-flush">
+                    <a href="#" id="halqaSettingsLink" class="list-group-item list-group-item-action bg-light">إعدادات الحلقة</a>
+                    <!-- Add more links here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!-- Dynamic Content Area -->
+            <div id="adminContent">
+                <h1>مرحباً بك في لوحة التحكم</h1>
+                <!-- محتوى الصفحة الافتراضي -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#halqaSettingsLink').on('click', function(e) {
+            e.preventDefault();
+            $('#adminContent').load('/HalqaSettings/Index');
+        });
+    });
+</script>
