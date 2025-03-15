@@ -47,7 +47,7 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">لوحة التحكم</div>
             <div class="list-group list-group-flush">
-                <a href="/Admin/HalqaSettings" class="list-group-item list-group-item-action bg-light">إعدادات الحلقة</a>
+                <a href="#" id="halqaSettingsLink" class="list-group-item list-group-item-action bg-light">إعدادات الحلقة</a>
                 <!-- Add more links here -->
             </div>
         </div>
@@ -89,14 +89,13 @@
         </div>
         <!-- /#page-content-wrapper -->
     </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
-        $("#menu-toggle").click(function(e) {
+        $("#halqaSettingsLink").click(function(e) {
             e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
+            $("#adminContent").load("/HalqaSettings/Index");
         });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
