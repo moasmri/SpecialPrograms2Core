@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SpecialProgramsCore.Models
+namespace SpecialPrograms2Core.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        // حقول إضافية اختيارية، مثال:
+        // Additional fields optional
         public string? FullName { get; set; }
-
     }
 }

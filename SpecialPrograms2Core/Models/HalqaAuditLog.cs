@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace SpecialProgramsCore.Models
+namespace SpecialPrograms2Core.Models
 {
     public class HalqaAuditLog
     {

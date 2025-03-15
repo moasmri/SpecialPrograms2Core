@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SpecialProgramsCore.Data;
+using SpecialPrograms2Core.Data;
 
-namespace SpecialProgramsCore.Models
+namespace SpecialPrograms2Core.Models
 {
     public class HalqaProgram  // تم تغيير الاسم لتجنب تعارض مع System.Program
     {

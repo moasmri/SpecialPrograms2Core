@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpecialPrograms2Core.Data;
+using SpecialPrograms2Core.Data;
 
 namespace SpecialPrograms2Core.Data.Migrations
 {
